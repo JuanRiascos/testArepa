@@ -1,55 +1,19 @@
 {
-  "name": "test",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@ant-design/icons": "^4.2.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "antd": "^4.4.0",
-    "beauty-stars": "^1.1.0",
-    "connected-react-router": "^6.8.0",
-    "history": "^5.0.0",
-    "jwt-decode": "^2.2.0",
-    "node-sass": "^4.14.1",
-    "react": "^16.13.1",
-    "react-app-env": "^1.2.3",
-    "react-dom": "^16.13.1",
-    "react-infinite-scroller": "^1.2.4",
-    "react-redux": "^7.2.0",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
-    "redux": "^4.0.5",
-    "redux-actions": "^2.6.5",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-form": "^8.3.6",
-    "redux-logger": "^3.0.6",
-    "redux-saga": "^1.1.3",
-    "sweetalert2": "^9.15.2"
-  },
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start:local": "react-app-env --env-file=environments/.env.local start",
-    "build:prod": "react-app-env --env-file=environments/.env.production build"
+    "server":"json-server --watch ./db/db.json",
+    "start":"node index.js"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.16.1"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "engines": {
+    "node": "12.10.0"
   }
 }
