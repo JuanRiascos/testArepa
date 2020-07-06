@@ -1,0 +1,17 @@
+.category {
+	&__content {
+		margin-top: 1em;
+		margin-left: 0.5em;
+	}
+	&--title {
+		align-items: center;
+		font-weight: bold;
+		font-size: 1.2em;
+		border-bottom-width: 0;
+	}
+	&--item {
+		font-size: 1.3em;
+		align-items: center;
+		border-bottom-width: 0;
+	}
+}

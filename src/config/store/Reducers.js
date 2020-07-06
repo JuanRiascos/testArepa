@@ -1,23 +1,24 @@
-import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
+import { combineReducers } from 'redux'
+import { connectRouter } from 'connected-react-router'
 
-import { auth } from '../../services/Auth/Actions';
+import reduceProduct from '../../services/Product/Reducer'
+import reduceCategory from '../../services/Category/Reducer'
+import reduceColor from '../../services/Color/Reducer'
+import reducePrice from '../../services/Price/Reducer'
 
-import reduceAuth from '../../services/Auth/Reducer';
-
-
-
-const appReducer = history =>
+const appReducer = (history) =>
 	combineReducers({
 		router: connectRouter(history),
-		auth: reduceAuth,
-	});
+		product: reduceProduct,
+		category: reduceCategory,
+		colors: reduceColor,
+		prices: reducePrice,
+	})
 
-const rootReducer = history => {
+const rootReducer = (history) => {
 	return (state, action) => {
-		if (action.type === auth.logout) state = undefined;
-		return appReducer(history)(state, action);
-	};
-};
+		return appReducer(history)(state, action)
+	}
+}
 
-export default rootReducer;
+export default rootReducer

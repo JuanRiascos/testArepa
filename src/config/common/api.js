@@ -1,11 +1,8 @@
-import { store } from '../../index';
-import { apiUrl } from '../config';
-
-import { auth } from '../../services/Auth/Actions';
+import { apiUrl } from '../config'
 
 export class Api {
 	post(url, data, header) {
-		let dataBody = JSON.stringify(data);
+		let dataBody = JSON.stringify(data)
 
 		return fetch(`${apiUrl}${url}`, {
 			method: 'POST',
@@ -13,63 +10,63 @@ export class Api {
 				? header
 				: {
 						Accept: 'application/json',
-						'Content-type': 'application/json'
+						'Content-type': 'application/json',
 				  },
-			body: dataBody
+			body: dataBody,
 		})
-			.then(async res => {
-				const payload = await res.json();
+			.then(async (res) => {
+				const payload = await res.json()
 
 				if (res.status === 401) {
-					store.dispatch(auth.logout());
-					return res;
+					console.log('error')
+					return res
 				}
-				return payload;
+				return payload
 			})
-			.catch(err => err);
+			.catch((err) => err)
 	}
 
 	put(url, data, header) {
-		let isFormData = data instanceof FormData;
+		let isFormData = data instanceof FormData
 		return fetch(`${apiUrl}${url}`, {
 			method: 'PUT',
 			headers: header
 				? header
 				: isFormData && {
 						Accept: isFormData ? '' : 'application/json',
-						'Content-type': isFormData ? '' : 'application/json'
+						'Content-type': isFormData ? '' : 'application/json',
 				  },
-			body: isFormData ? data : JSON.stringify(data)
+			body: isFormData ? data : JSON.stringify(data),
 		})
-			.then(async res => {
-				const payload = await res.json();
+			.then(async (res) => {
+				const payload = await res.json()
 
 				if (res.status === 401) {
-					store.dispatch(auth.logout());
-					return res;
+					console.log('error')
+					return res
 				}
-				return payload;
+				return payload
 			})
-			.catch(err => err);
+			.catch((err) => err)
 	}
 
 	get(url, params, headers) {
-		url = new URL(`${apiUrl}${url}`);
-		if (params) Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+		url = new URL(`${apiUrl}${url}`)
+		if (params) Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]))
 		return fetch(url, {
-			method: 'GET'
+			method: 'GET',
 		})
-			.then(async res => {
-				const payload = await res.json();
+			.then(async (res) => {
+				const payload = await res.json()
 
 				if (res.status === 401) {
-					store.dispatch(auth.logout());
-					return res;
+					console.log('error')
+					return res
 				}
-				return payload;
+				return payload
 			})
-			.catch(err => err);
+			.catch((err) => err)
 	}
 }
 
-export default new Api();
+export default new Api()
