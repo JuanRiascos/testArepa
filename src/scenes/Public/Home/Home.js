@@ -10,7 +10,7 @@ import Category from './components/category/Category'
 import Color from './components/colors/Color'
 import Price from './components/price/Price'
 
-import icon from '../../../assets/images/icon/icon.png'
+import icon from '../../../assets/images/icon/Icon.png'
 
 const { Header, Content, Sider } = Layout
 const { Option } = Select
