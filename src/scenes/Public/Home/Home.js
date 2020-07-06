@@ -55,7 +55,7 @@ const FormHome = () => {
 					<Breadcrumb className='m-35'>
 						<Breadcrumb.Item className='breadcrumb__item'>Home</Breadcrumb.Item>
 						<Breadcrumb.Item className='breadcrumb__item breadcrumb__item--principal'>
-							Lifestyle
+							Lifestyles
 						</Breadcrumb.Item>
 					</Breadcrumb>
 				</Col>
