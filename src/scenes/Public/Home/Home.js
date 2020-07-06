@@ -10,6 +10,8 @@ import Category from './components/category/Category'
 import Color from './components/colors/Color'
 import Price from './components/price/Price'
 
+import icon from '../../../assets/images/icon/icon.png'
+
 const { Header, Content, Sider } = Layout
 const { Option } = Select
 
@@ -44,7 +46,7 @@ const FormHome = () => {
 					<ShoppingCartOutlined />
 					<UserOutlined />
 					<div className='header__content icon'>
-						<img src={require('../../../assets/images/icon/icon.png')} alt='' className='totalSize' />
+						<img src={icon} alt='' className='totalSize' />
 					</div>
 				</Col>
 			</Header>
