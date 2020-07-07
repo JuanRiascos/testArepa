@@ -1,34 +1,52 @@
-import React, { useEffect } from 'react'
-import { Layout, Menu, Breadcrumb, Col, Row, Skeleton, Select } from 'antd'
+import React, { useState } from 'react'
+import { Layout, Menu, Breadcrumb, Col, Row, Skeleton, Select, Button } from 'antd'
 import { UserOutlined, SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
-import InfiniteScroll from 'react-infinite-scroller'
 
 import { product as productAction } from '../../../services/Product/Actions'
+import { categories as categoriesActions } from '../../../services/Category/Actions'
+import { colors as colorsActions } from '../../../services/Color/Actions'
 
 import Category from './components/category/Category'
 import Color from './components/colors/Color'
 import Price from './components/price/Price'
+import Infinity from './components/infinity/Infinity'
 
 import icon from '../../../assets/images/icon/Icon.png'
 
-const { Header, Content, Sider } = Layout
+const { Header, Sider } = Layout
 const { Option } = Select
 
 const FormHome = () => {
-	const { getProductPage, getProductPageNext } = productAction
-	const { page, product_page, loading, next } = useSelector((state) => state.product)
-	const dispatch = useDispatch()
 	const params = { _page: 1, _limit: 6 }
 
-	const _handleScroll = (event) => {
-		if (!loading.getProductNext && product_page.length > 0)
-			dispatch(getProductPageNext({ ...params, _page: page + 1 }, product_page))
+	const { getProductPage, getProductPageFilter, getProductPageReset } = productAction
+	const { putSelectReset } = categoriesActions
+	const { putSelectColorReset } = colorsActions
+	const { product_page, loading, product_page_filter } = useSelector((state) => state.product)
+	const dispatch = useDispatch()
+
+	const [dataFilter, setDataFilter] = useState({})
+
+	const _handleFilter = (filter, type) => {
+		const paramsFilter = { ...dataFilter, [type]: filter }
+		setDataFilter(paramsFilter)
+		dispatch(getProductPageFilter(paramsFilter))
 	}
 
-	useEffect(() => {
+	const _handleFilterPrice = (filter) => {
+		const paramsFilter = { ...dataFilter, filter }
+		setDataFilter(paramsFilter)
+		dispatch(getProductPageFilter(paramsFilter))
+	}
+
+	const _handleResetFilter = () => {
+		setDataFilter({})
+		dispatch(getProductPageReset())
 		dispatch(getProductPage(params))
-	}, [])
+		dispatch(putSelectReset())
+		dispatch(putSelectColorReset())
+	}
 
 	return (
 		<>
@@ -65,15 +83,22 @@ const FormHome = () => {
 				<Sider width={200} className='site-layout-background sider__content'>
 					<h1 className='sider--title'>Lifestyle</h1>
 					<div className='sider__container'>
-						<Category />
-						<Color />
-						<Price />
+						<Category getProductFilter={_handleFilter} />
+						<Color getProductFilter={_handleFilter} />
+						<Price getProductFilter={_handleFilterPrice} />
+						<div className='item__content'>
+							<Button disabled={Object.keys(dataFilter).length === 0} onClick={_handleResetFilter}>
+								Borrar Filtro
+							</Button>
+						</div>
 					</div>
 				</Sider>
 				<div className='content'>
 					<Row className='mb-10'>
 						<Col span={2}>
-							<p className='product__description--category'>{product_page.length} artículos</p>
+							<p className='product__description--category'>
+								{product_page.length > 0 ? product_page.length : product_page_filter.length} artículos
+							</p>
 						</Col>
 						<Col span={7} className='filter'>
 							<p className='product__description--category'>Ordernar por:</p>
@@ -84,31 +109,7 @@ const FormHome = () => {
 						</Col>
 					</Row>
 					<Skeleton loading={loading.getProductNext} />
-					{product_page && (
-						<InfiniteScroll pageStart={3} loadMore={_handleScroll} hasMore={next}>
-							<Row gutter={[48, 48]}>
-								{product_page.map((product, index) => (
-									<Col span={8} xs={24} sm={12} lg={8} md={12} key={index}>
-										<div className='product__content'>
-											<div className='product__image'>
-												<img src={product.image} className='totalSize' alt='' />
-											</div>
-											<div className='product__description'>
-												<div>
-													<p className='product__description--name'>{product.name}</p>
-													<p className='product__description--category'>{product.category}</p>
-												</div>
-												<div>
-													<p className='product__description--descount'>{product.discount}</p>
-													<p className='product__description--price'>{product.price}</p>
-												</div>
-											</div>
-										</div>
-									</Col>
-								))}
-							</Row>
-						</InfiniteScroll>
-					)}
+					<Infinity />
 				</div>
 			</Layout>
 		</>

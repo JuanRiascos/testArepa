@@ -16,7 +16,7 @@ export const INITIAL_STATE = {
 const reducer = handleActions(
 	{
 		PRICES: {
-			GET: (state, { payload = {} }) => ({
+			GET: (state) => ({
 				...state,
 				loading: { ...state.loading, get: true },
 				error: { ...state.error, get: false },
@@ -31,7 +31,7 @@ const reducer = handleActions(
 						prices,
 					}
 				},
-				throw(state, { error, payload: { message } }) {
+				throw(state, { payload: { message } }) {
 					return {
 						...state,
 						error: { ...state.error, get: message },

@@ -46,11 +46,6 @@
 .content {
 	padding-left: 1.25rem;
 	padding-right: 1.25rem;
-	// position: relative;
-	// bottom: 3%;
-	// &::-webkit-scrollbar {
-	// 	width: 0px;
-	// }
 }
 .product {
 	&__content {
@@ -79,23 +74,24 @@
 		background-color: $white;
 		justify-content: space-around;
 		&--name {
-			margin-bottom: 0.625rem;
+			margin-bottom: 0.4rem;
 			font-weight: 700;
 			font-size: smaller;
 		}
 		&--category {
 			color: $whiteLight;
 			font-size: smaller;
+			margin-bottom: 0.4rem;
 		}
 		&--descount {
-			margin-bottom: 0.625rem;
+			margin-bottom: 0.4rem;
 			color: $whiteLight;
 			font-size: x-small;
 			text-decoration: line-through;
-			text-align: right;
 		}
 		&--price {
 			font-weight: 700;
+			margin-bottom: 0.4rem;
 			font-size: smaller;
 		}
 	}

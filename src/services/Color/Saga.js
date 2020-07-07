@@ -4,6 +4,7 @@ import Api from '../../config/common/api';
 
 function* getAll() {
 	const response = yield Api.get('/colors');
+	response.map((item) => ({ ...item, isSelected: false }))
 	yield put(colors.getAllResponse(response));
 }
 

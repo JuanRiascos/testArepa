@@ -1,16 +1,17 @@
-import { put, takeLatest, all } from 'redux-saga/effects';
-import { categorys } from './Actions';
-import Api from '../../config/common/api';
+import { put, takeLatest, all } from 'redux-saga/effects'
+import { categories } from './Actions'
+import Api from '../../config/common/api'
 
 function* getAll() {
-	const response = yield Api.get('/category');
-	yield put(categorys.getAllResponse(response));
+	let response = yield Api.get('/category')
+	response.map((item) => ({ ...item, isSelected: false }))
+	yield put(categories.getAllResponse(response))
 }
 
 function* ActionWatcher() {
-	yield takeLatest(categorys.getAll, getAll);
+	yield takeLatest(categories.getAll, getAll)
 }
 
 export default function* rootSaga() {
-	yield all([ActionWatcher()]);
+	yield all([ActionWatcher()])
 }

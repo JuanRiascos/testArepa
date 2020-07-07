@@ -1,8 +1,14 @@
 import { createActions } from 'redux-actions'
 
-export const { categorys } = createActions({
-	CATEGORYS: {
+export const { categories } = createActions({
+	CATEGORIES: {
 		GET_ALL: () => ({}),
-		GET_ALL_RESPONSE: (categorys) => ({ categorys }),
+		GET_ALL_RESPONSE: (categories) => ({ categories }),
+
+		PUT_SELECT:(selectCategory)=>({selectCategory}),
+
+		PUT_SELECT_RESET:()=>({})
+		
+
 	},
 })

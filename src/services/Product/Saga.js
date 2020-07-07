@@ -10,7 +10,7 @@ function* getProductPage({ payload }) {
 	if (response) {
 		yield put(productActions.getProductPageResponse(response, true))
 	} else {
-		const err = new TypeError('ERROR_GET_CLIENTS_PAGE')
+		const err = new TypeError('ERROR_GET_PRODUCT_PAGE')
 		yield put(productActions.getProductPageResponse(err))
 	}
 }
@@ -21,17 +21,31 @@ function* getProductPageNext({ payload }) {
 
 	if (response) {
 		yield put(
-			productActions.getProductPageNextResponse(previous_clients_page.concat(response), (response.length > 0))
+			productActions.getProductPageNextResponse(previous_clients_page.concat(response), response.length > 0)
 		)
 	} else {
-		const err = new TypeError('ERROR_GET_CLIENTS_PAGE')
+		const err = new TypeError('ERROR_GET_PRODUCT_NEXT_PAGE')
 		yield put(productActions.getProductPageNextResponse(err))
 	}
 }
 
+function* getProductPageFilter({ payload }) {
+	const { params } = payload
+	const response = yield Api.get('/product', params)
+
+	if (response) {
+		yield put(productActions.getProductPageFilterResponse(response, true))
+	} else {
+		const err = new TypeError('ERROR_GET_FILTER')
+		yield put(productActions.getProductFilterPageResponse(err))
+	}
+}
+
+
 function* ActionWatcher() {
 	yield takeLatest(productActions.getProductPage, getProductPage)
 	yield takeLatest(productActions.getProductPageNext, getProductPageNext)
+	yield takeLatest(productActions.getProductPageFilter, getProductPageFilter)
 }
 
 export default function* rootSaga() {

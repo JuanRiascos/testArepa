@@ -4,22 +4,24 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { prices as pricesActions } from '../../../../../services/Price/Actions'
 
-const Price = () => {
+const Price = ({ getProductFilter }) => {
 	const [inputValue, setInputValue] = useState([])
 
 	const { get } = pricesActions
-	const { prices, succes } = useSelector((state) => state.prices)
-	const [visible, setViseible] = useState(false)
+	const { prices } = useSelector((state) => state.prices)
 	const dispatch = useDispatch()
 
 	const onChange = (value) => {
 		setInputValue(value)
 	}
+
 	const onChangeMin = (value) => {
 		setInputValue([value, inputValue[1]])
 	}
+
 	const onChangeMax = (value) => {
 		setInputValue([inputValue[0], value])
+		getProductFilter({ price_gte: inputValue[0] ? inputValue[0] : 0, price_lte: value })
 	}
 
 	useEffect(() => {

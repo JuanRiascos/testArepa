@@ -24,3 +24,8 @@
 .bg-white {
 	background-color: $white;
 }
+.text{
+	&--left{
+		text-align: end;
+	}
+}

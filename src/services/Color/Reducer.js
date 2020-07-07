@@ -16,7 +16,7 @@ export const INITIAL_STATE = {
 const reducer = handleActions(
 	{
 		COLORS: {
-			GET_ALL: (state, { payload = {} }) => ({
+			GET_ALL: (state) => ({
 				...state,
 				loading: { ...state.loading, get: true },
 				error: { ...state.error, get: false },
@@ -31,7 +31,7 @@ const reducer = handleActions(
 						colors,
 					}
 				},
-				throw(state, { error, payload: { message } }) {
+				throw(state, { payload: { message } }) {
 					return {
 						...state,
 						error: { ...state.error, get: message },
@@ -39,6 +39,20 @@ const reducer = handleActions(
 					}
 				},
 			},
+			PUT_SELECT: (state, { payload: { selectColor } }) => ({
+				...state,
+				colors: state.colors.map((color, index) => ({
+					...color,
+					isSelected: index === selectColor,
+				})),
+			}),
+			PUT_SELECT_COLOR_RESET: (state) => ({
+				...state,
+				colors: state.colors.map((color) => ({
+					...color,
+					isSelected: false,
+				})),
+			}),
 		},
 	},
 	INITIAL_STATE

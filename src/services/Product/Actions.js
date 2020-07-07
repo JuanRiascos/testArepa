@@ -7,5 +7,10 @@ export const { product } = createActions({
 
 		GET_PRODUCT_PAGE_NEXT: (params, previous_clients_page) => ({ params, previous_clients_page }),
 		GET_PRODUCT_PAGE_NEXT_RESPONSE: (product_page_news, next) => ({ product_page_news, next }),
+
+		GET_PRODUCT_PAGE_FILTER: (params) => ({ params }),
+		GET_PRODUCT_PAGE_FILTER_RESPONSE: (product_page_filter) => ({ product_page_filter }),
+
+		GET_PRODUCT_PAGE_RESET: () => ({ }),
 	},
 })

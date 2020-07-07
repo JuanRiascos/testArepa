@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions'
 
 export const INITIAL_STATE = {
-	categorys: [],
+	categories: [],
 	error: {
 		get: undefined,
 	},
@@ -15,23 +15,23 @@ export const INITIAL_STATE = {
 
 const reducer = handleActions(
 	{
-		CATEGORYS: {
-			GET_ALL: (state, { payload = {} }) => ({
+		CATEGORIES: {
+			GET_ALL: (state) => ({
 				...state,
 				loading: { ...state.loading, get: true },
 				error: { ...state.error, get: false },
 				succes: { ...state.succes, get: false },
 			}),
 			GET_ALL_RESPONSE: {
-				next(state, { payload: { categorys } }) {
+				next(state, { payload: { categories } }) {
 					return {
 						...state,
 						succes: { ...state.succes, get: true },
 						loading: { ...state.loading, get: false },
-						categorys,
+						categories,
 					}
 				},
-				throw(state, { error, payload: { message } }) {
+				throw(state, { payload: { message } }) {
 					return {
 						...state,
 						error: { ...state.error, get: message },
@@ -39,6 +39,20 @@ const reducer = handleActions(
 					}
 				},
 			},
+			PUT_SELECT: (state, { payload: { selectCategory } }) => ({
+				...state,
+				categories: state.categories.map((category, index) => ({
+					...category,
+					isSelected: index === selectCategory,
+				})),
+			}),
+			PUT_SELECT_RESET: (state) => ({
+				...state,
+				categories: state.categories.map((category, index) => ({
+					...category,
+					isSelected: false,
+				})),
+			}),
 		},
 	},
 	INITIAL_STATE

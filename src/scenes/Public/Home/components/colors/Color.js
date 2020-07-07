@@ -4,10 +4,15 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { colors as colorsActions } from '../../../../../services/Color/Actions'
 
-const Color = () => {
-	const { getAll } = colorsActions
+const Color = ({ getProductFilter }) => {
+	const { getAll, putSelect } = colorsActions
 	const { colors } = useSelector((state) => state.colors)
 	const dispatch = useDispatch()
+
+	const _handleSetFilterColor = (codige, index) => {
+		getProductFilter(codige, 'color')
+		dispatch(putSelect(index))
+	}
 
 	useEffect(() => {
 		dispatch(getAll())
@@ -19,10 +24,12 @@ const Color = () => {
 				{colors.map((color, index) => (
 					<Col key={index} span={4}>
 						<div
+							onClick={() => _handleSetFilterColor(color.codige, index)}
 							className='color__container'
 							style={{
-								background: color.codige,
-								border: color.codige === '#fff' && 'solid 1px gray',
+								background: `#${color.codige}`,
+								border: color.codige === 'fff' && 'solid 1px gray',
+								borderRadius: color.isSelected && 10,
 							}}
 						/>
 					</Col>

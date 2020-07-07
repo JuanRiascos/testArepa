@@ -1,0 +1,14 @@
+.modal {
+	&--image {
+		width: 100%;
+	}
+	&--title {
+		font-weight: bold;
+		font-size: medium;
+	}
+	&__content {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+	}
+}

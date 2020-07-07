@@ -16,6 +16,7 @@
     "react": "^16.13.1",
     "react-app-env": "^1.2.3",
     "react-dom": "^16.13.1",
+    "react-infinite-scroll-component": "^5.0.5",
     "react-infinite-scroller": "^1.2.4",
     "react-redux": "^7.2.0",
     "react-router": "^5.2.0",
@@ -27,7 +28,8 @@
     "redux-form": "^8.3.6",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.1.3",
-    "sweetalert2": "^9.15.2"
+    "sweetalert2": "^9.15.2",
+    "sweetalert2-react-content": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

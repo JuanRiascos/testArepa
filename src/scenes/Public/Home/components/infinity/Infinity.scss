@@ -1,0 +1,21 @@
+.infinity {
+	&__right {
+		height: 3.875em;
+		background: #1c69d4;
+		display: inline-flex;
+		align-items: center;
+		width: 3.75em;
+    justify-content: center;
+    cursor: pointer;
+	}
+	&__icon {
+		&--shoping {
+			font-size: 1.7em;
+			color: $white;
+		}
+		&--plus {
+			font-size: 0.6em;
+			color: $white;
+		}
+	}
+}
