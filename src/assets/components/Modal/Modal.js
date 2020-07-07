@@ -12,7 +12,7 @@ const Modal = ({ visibleModal, item, onVisible }) => {
 			onCancel={onVisible}
 			onOk={onVisible}>
 			<Row>
-				<Col md={12}>
+				<Col md={12} className='p'>
 					<img className='modal--image' src={item.image} alt='' />
 				</Col>
 				<Col md={12} className='modal__content'>
