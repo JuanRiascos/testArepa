@@ -12,7 +12,7 @@
     "connected-react-router": "^6.8.0",
     "history": "^5.0.0",
     "jwt-decode": "^2.2.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-app-env": "^1.2.3",
     "react-dom": "^16.13.1",
